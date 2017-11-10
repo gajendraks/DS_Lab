@@ -1,0 +1,88 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+	int data;
+	struct node* next;
+};
+
+void insert_begi(struct node**,int );
+void delete_num(struct node**,int );
+void display(struct node* );
+
+
+#include "P1_1.h"
+#include "P1_1func.c"
+
+int main()
+{	
+	int ch;
+	printf("1. Insert at beginning\n 2. Delete the specific element from the list\n3.Display elements");
+	scanf("%d",&ch);
+	
+	struct node *list;
+	
+	switch(ch)
+	{
+		int x;
+		case 1: printf("enter the no to add at the beginning\n");
+				scanf("%d",&x);
+				insert_begi(&list,x);
+				break;
+		case 2: printf("enter no to delete\n");
+				scanf("%d",&x);
+				delete_num(&list,x);
+				break;
+		case 3: display(list);
+				break;
+	}
+}
+
+
+
+#include "P1_1.h"
+
+void insert_begi(struct node** p,int x)
+{
+	struct node *temp;
+	temp=(struct node*)malloc(sizeof(struct node));
+	temp->data=x;
+	temp->next=NULL;
+	
+	if(*p==NULL)
+		*p=temp;
+	else
+	{
+		temp->next=*p;
+		*p=temp;
+	}
+}
+void delete_num(struct node** p,int x)
+{
+	struct node *q;
+	struct node *prev;
+	prev=NULL;
+	q=*p;
+	
+	while(q!=NULL && q->data!=x)
+	{
+		prev=q;
+		q=q->next;
+	}
+	if(q==NULL)
+		printf("no value");
+	else if (prev==NULL)
+		*p=q->next;
+	else
+		prev->next=q->next;
+}
+
+void display(struct node *p)
+{
+	while(p!=NULL)
+	{
+		printf("%d->",p->data);
+	}
+}
+	
